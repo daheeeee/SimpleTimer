@@ -26,7 +26,7 @@ class ViewController: UIViewController {
       @objc func updateTime(){
             let date = Date()
             let formatter = DateFormatter()
-            formatter.dateFormat = "HH/mm/ss EEE"
+            formatter.dateFormat = "HH-mm-ss EEE"
             tl.text = formatter.string(from: date)
             
       }
@@ -34,7 +34,12 @@ class ViewController: UIViewController {
 
       @IBAction func ts(_ sender: Any) {
             if ts.isOn == true {
-                  simpleTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+//                  simpleTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+                  
+                  //closure 사용
+                  simpleTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (simpleTimer) in
+                        self.updateTime()
+                  })
             } else{
                   simpleTimer.invalidate()
             }
